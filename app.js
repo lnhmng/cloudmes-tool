@@ -8,7 +8,7 @@ import routes from './src/routes/index.js';
 
 import { swaggerUi, swaggerSpec } from "./src/services/swagger.js";
 
-import sequelize from "./src/configs/postgresQL-connect.js";
+import sequelize from "./src/configs/postgreSQL-connect.js";
 
 dotenv.config();
 
