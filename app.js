@@ -3,10 +3,11 @@ import http from "http";
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from "dotenv";
+import cookieParser from 'cookie-parser';
+import path from 'path';
+
 import { CONSTANTS } from './src/utils/constants.js';
 import routes from './src/routes/index.js';
-
-import { swaggerUi, swaggerSpec } from "./src/services/swagger.js";
 
 import sequelize from "./src/configs/postgreSQL-connect.js";
 
@@ -14,15 +15,17 @@ dotenv.config();
 
 const app = express();
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+const __dirname = path.resolve();
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/src/sites/views'))
+app.use(cookieParser());
 
 app.use(bodyParser.json({ limit: CONSTANTS.MAX_JSON_BODY_REQUEST }));
 app.use(cors({ origin: "*" }));
-app.use('/', routes);
 
-app.get('/', (req, res) => {
-    res.json('Hello World');
-});
+app.use('/', routes);
+app.use(express.static(path.join(__dirname, '/src/sites/publics')));
 
 const startServer = async () => {
     try {
@@ -31,8 +34,8 @@ const startServer = async () => {
 
         const server = http.createServer(app);
 
-        server.listen(process.env.APP_PORT, "0.0.0.0", () => {
-            console.log(`Server is running on http://0.0.0.0:${process.env.APP_PORT}`);
+        server.listen(process.env.APP_PORT, () => {
+            console.log(`Server is running on http://localhost:${process.env.APP_PORT}`);
         });
     } catch (error) {
         console.error('Đã xảy ra lỗi khi kết nối tới database:', error);

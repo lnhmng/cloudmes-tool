@@ -2,13 +2,21 @@ import express from 'express';
 
 import { CONSTANTS } from '../../../utils/constants.js';
 
-import ToolController from '../../../controllers/tool/get-table-info.js';
+import SqlToolInterface from '../../../sites/controller/tool/sql-tool.js'
 
-const tool = express.Router();
 
-tool.get(
-    CONSTANTS.API_TABLE_INFO,
-    ToolController.get_table_info
+const sqlTool = express.Router();
+
+// tool.get(
+//     CONSTANTS.API_TABLE_INFO,
+//     ToolController.get_table_info
+// )
+
+sqlTool.get(
+    CONSTANTS.API_DATA,
+    SqlToolInterface.toolRender
+
 )
 
-export default tool;
+export default sqlTool;
+

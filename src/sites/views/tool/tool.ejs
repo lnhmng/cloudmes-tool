@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>SQL Param Tool</title>    
+    <link rel="stylesheet" href="/assets/styles/tool.css">
+</head>
+<body onload="changeLanguage()">
+    <div class="main-wrapper">
+        <div class="header">
+            <h3 id="lblTitle">Tool thêm dấu nháy đơn SQL</h3>
+            <select id="langSelector" onchange="changeLanguage()">
+                <option value="vi">Tiếng Việt</option>
+                <option value="cn">中文简体</option>
+            </select>
+        </div>
+
+        <div class="container">
+            <div class="col-wrapper">
+                <div class="count-info">
+                    <span id="lblCountInput">Số lượng (Input):</span> 
+                    <span id="cntInput" class="count-number">0</span>
+                </div>
+                <textarea id="input" placeholder="Dán danh sách vào đây..." oninput="updateLineCounts()"></textarea>
+            </div>
+            
+            <div class="buttons">
+                <label class="option-group" title="Xóa cả dấu cách nằm giữa các chữ">
+                    <input type="checkbox" id="chkRemoveAllSpace" checked>
+                    <span id="lblRemoveSpace">Xóa mọi dấu cách</span>
+                </label>
+
+                <label class="option-group" title="Chuyển đổi tất cả chữ cái thành in hoa">
+                    <input type="checkbox" id="chkToUppercase" checked>
+                    <span id="lblToUppercase">Chuyển sang CHỮ HOA</span>
+                </label>
+
+                <button id="btnConvert" class="btn-convert" onclick="convert()">Chuyển đổi &gt;&gt;</button>
+                <button id="btnRevert" class="btn-revert" onclick="revert()">&lt;&lt; Khôi phục</button>
+                <button id="btnUp" class="btn-up" onClick=""></button>
+                <button id="btnClear" class="btn-clear" onclick="clearAll()">✖ Xóa hết</button>
+            </div>
+            
+            <div class="col-wrapper">
+                <div class="count-info">
+                    <span id="lblCountOutput">Số lượng (Output):</span> 
+                    <span id="cntOutput" class="count-number">0</span>
+                </div>
+                <textarea id="output" placeholder="Kết quả..." oninput="updateLineCounts()"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/tool/tool.js"></script>
+
+</body>
+</html>
